@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className="ml-4 w-full border-t pt-5 lg:ml-0">
       <div className="container mx-auto">
-        <section className="flex flex-col justify-between gap-10 lg:flex-row lg:gap-20">
+        <section className="flex flex-col gap-10 lg:flex-row lg:gap-20">
           <section>
             <Link to="/" className="flex items-center space-x-4">
               <Icons.logo className="size-6" />
