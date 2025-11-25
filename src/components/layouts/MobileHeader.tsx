@@ -4,6 +4,9 @@ import { Icons } from "../icons/Icon";
 import { siteConfig } from "@/config/types";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import {
   Sheet,
   SheetClose,
@@ -11,7 +14,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Link } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
@@ -24,6 +26,21 @@ interface MainNavigationProps {
 }
 
 export function MobileHeader({ items }: MainNavigationProps) {
+  const [isDesktop, setIsDesktop] = useState(false);
+  const query = "(min-width: 1024px)";
+
+  useEffect(() => {
+    function onChange(event: MediaQueryListEvent) {
+      setIsDesktop(event.matches);
+    }
+
+    const result = matchMedia(query);
+    result.addEventListener("change", onChange);
+    return () => result.removeEventListener("change", onChange);
+  });
+  if (isDesktop) {
+    return null;
+  }
   return (
     <div className="lg:hidden">
       <Sheet>
