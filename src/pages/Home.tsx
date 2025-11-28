@@ -57,7 +57,22 @@ function Home() {
   //     </div>
   //   );
   // }
-
+  const Title = ({
+    title,
+    href,
+    sideText,
+  }: {
+    title: string;
+    href: string;
+    sideText: string;
+  }) => (
+    <div className="my-4 flex flex-col justify-between px-4 md:flex-row md:px-0 lg:my-8">
+      <h3 className="font-semi-bold mb-4 text-2xl">{title}</h3>
+      <Link to={href} className="text-muted-foreground hover:underline">
+        {sideText}
+      </Link>
+    </div>
+  );
   return (
     <div className="container mx-auto">
       <div className="flex flex-col lg:flex-row lg:justify-between">
@@ -80,7 +95,7 @@ function Home() {
             <Button
               asChild
               variant="outline"
-              className="text-own rounded-full px-8 py-6 text-base font-bold"
+              className="rounded-full px-8 py-6 text-base font-bold"
             >
               <Link to="#">Explore</Link>
             </Button>
@@ -90,6 +105,7 @@ function Home() {
         <img src={Couch} alt="Couch" className="w-full lg:w-3/5" />
       </div>
       <CarouselCard products={products} />
+      <Title title="Recent Blogs" href="/blogs" sideText="View all "></Title>
     </div>
   );
 }
