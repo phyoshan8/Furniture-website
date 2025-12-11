@@ -22,7 +22,7 @@ function ProductCard({ product }: ProductProps) {
   return (
     <Card className="size-full overflow-hidden rounded-lg py-0">
       <CardHeader className="gap-0 border-b p-0">
-        <Link to={`porducts/${product.id}`}>
+        <Link to={`products/${product.id}`}>
           <AspectRatio ratio={1 / 1} className="bg-muted">
             <img
               src={product.images[0]}
