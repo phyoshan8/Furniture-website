@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import type { MainNavItem } from "@/types";
 import { Icons } from "../icons/Icon";
-import { siteConfig } from "@/config/types";
+import { siteConfig } from "@/config/site";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 import {

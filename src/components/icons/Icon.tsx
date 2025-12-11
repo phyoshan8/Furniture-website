@@ -4,6 +4,7 @@ import {
   PaperPlaneIcon,
   ArrowLeftIcon,
   LayersIcon,
+  PlusCircledIcon,
 } from "@radix-ui/react-icons";
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -30,4 +31,5 @@ export const Icons = {
   paperPlane: PaperPlaneIcon,
   arrowLeft: ArrowLeftIcon,
   layersIcon: LayersIcon,
+  circlePlus: PlusCircledIcon,
 };

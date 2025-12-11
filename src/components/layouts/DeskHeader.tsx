@@ -12,10 +12,10 @@ import {
 import { cn } from "@/lib/utils";
 import type { MainNavItem } from "@/types";
 import { Icons } from "../icons/Icon";
-import { siteConfig } from "@/config/types";
+import { siteConfig } from "@/config/site";
 
 interface MainNavigationProps {
-  items?: MainNavItem[];
+  items: MainNavItem[];
 }
 
 export default function MainNavigation({ items }: MainNavigationProps) {
@@ -23,12 +23,12 @@ export default function MainNavigation({ items }: MainNavigationProps) {
     <div className="hidden gap-6 lg:flex">
       <Link to="/" className="flex items-center space-x-2">
         <Icons.logo className="size-7" aria-hidden="true" />
-        <span className="inline-block font-bold">{siteConfig.name}</span>
+        <span className="font-bold">{siteConfig.name}</span>
         <span className="sr-only">Home</span>
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
-          {items?.[0]?.card && (
+          {items[0].card && (
             <NavigationMenuItem>
               <NavigationMenuTrigger>{items[0].title}</NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -62,7 +62,7 @@ export default function MainNavigation({ items }: MainNavigationProps) {
               </NavigationMenuContent>
             </NavigationMenuItem>
           )}
-          {items?.[0]?.menu &&
+          {items[0].menu &&
             items[0].menu.map((item) => (
               <NavigationMenuItem key={item.title}>
                 <Link to={String(item.href)}>

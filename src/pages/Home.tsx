@@ -4,59 +4,14 @@ import Couch from "@/data/images/couch.png";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 import { CarouselCard } from "./products/CarouselCard";
+import BlogCard from "../components/blogs/BlogCard";
+import { posts } from "@/data/posts";
+import ProductCard from "@/components/products/ProductCard";
 
-// import { Skeleton } from "@/components/ui/skeleton";
+const samplePosts = posts.slice(0, 3);
+const sampleProduct = products.slice(0, 4);
 
 function Home() {
-  // const { productsData, postsData } = useLoaderData();
-
-  // const {
-  //   data: productsData,
-  //   isLoading: isLoadingProduct,
-  //   isError: isErrorProduct,
-  //   error: errorProduct,
-  //   refetch: refetchProduct,
-  // } = useQuery(productQuery("?limit=8"));
-  // const {
-  //   data: postsData,
-  //   isLoading: isLoadingPost,
-  //   isError: isErrorPost,
-  //   error: errorPost,
-  //   refetch: refetchPost,
-  // } = useQuery(postQuery("?limit=3"));
-
-  // if (isLoadingProduct && isLoadingPost) {
-  //   return (
-  //     <div className="flex flex-col space-y-3">
-  //       <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-  //       <div className="space-y-2">
-  //         <Skeleton className="h-4 w-[250px]" />
-  //         <Skeleton className="h-4 w-[200px]" />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // if (isErrorProduct && isErrorPost) {
-  //   return (
-  //     <div className="container mx-auto my-32 flex flex-1 place-content-center">
-  //       <div className="text-center text-red-400">
-  //         <p className="mb-4">
-  //           {errorProduct.message} & {errorPost.message}
-  //         </p>
-  //         <Button
-  //           onClick={() => {
-  //             refetchProduct();
-  //             refetchPost();
-  //           }}
-  //           variant="secondary"
-  //         >
-  //           Retry
-  //         </Button>
-  //       </div>
-  //     </div>
-  //   );
-  // }
   const Title = ({
     title,
     href,
@@ -77,7 +32,7 @@ function Home() {
     <div className="container mx-auto">
       <div className="flex flex-col lg:flex-row lg:justify-between">
         {/* Text Section */}
-        <div className="my-8 text-center lg:mt-16 lg:mb-0 lg:w-2/5 lg:text-left">
+        <div className="my-8 text-center lg:mt-8 lg:mb-0 lg:w-2/5 lg:text-left">
           <h1 className="text-own mb-4 text-4xl font-extrabold lg:mb-8 lg:text-6xl">
             Modern Interior Design Studio
           </h1>
@@ -105,7 +60,26 @@ function Home() {
         <img src={Couch} alt="Couch" className="w-full lg:w-3/5" />
       </div>
       <CarouselCard products={products} />
-      <Title title="Recent Blogs" href="/blogs" sideText="View all "></Title>
+
+      {/*Featured Products section */}
+      <Title
+        title="Featured Products"
+        href="/products"
+        sideText="View all Products "
+      ></Title>
+      <div className="grid grid-cols-1 gap-6 space-x-4 px-4 md:grid-cols-2 md:px-0 lg:grid-cols-4">
+        {sampleProduct.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+
+      {/* Recent Blog  sections */}
+      <Title
+        title="Recent Blogs"
+        href="/blogs"
+        sideText="View all Posts "
+      ></Title>
+      <BlogCard posts={samplePosts} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import DeskHeader from "./DeskHeader";
-import { siteConfig } from "@/config/types";
+import { siteConfig } from "@/config/site";
 import { MobileHeader } from "./MobileHeader";
 import { ModeToggle } from "../mode-toggle";
 
