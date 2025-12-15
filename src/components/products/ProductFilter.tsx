@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import type { Category } from "@/types";
 import {
@@ -8,55 +9,73 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Button } from "../ui/button";
-import { useState } from "react";
 
 interface filterListProps {
   filterList: { types: Category[]; categories: Category[] };
-  onFilterSubmit?: (filters: { categories: string[]; types: string[] }) => void;
+  onSubmit: (filters: {
+    selectedCategories: string[];
+    selectedTypes: string[];
+  }) => void;
+  initialFilters: { selectedCategories: string[]; selectedTypes: string[] };
 }
+
+// ... (imports and interface remain the same)
 
 export default function ProductFilter({
   filterList,
-  onFilterSubmit,
+  onSubmit,
+  initialFilters,
 }: filterListProps) {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  // Local state to track selected checkboxes before submission
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    initialFilters.selectedCategories,
+  );
+  const [selectedTypes, setSelectedTypes] = useState<string[]>(
+    initialFilters.selectedTypes,
+  );
 
-  function toggleSelected(
-    list: string[],
-    setList: (v: string[]) => void,
-    id: string,
-  ) {
-    setList(list.includes(id) ? list.filter((i) => i !== id) : [...list, id]);
-  }
+  // Helper functions remain correct
+  const handleCategoryChange = (id: string, checked: boolean) => {
+    setSelectedCategories((prev) =>
+      checked ? [...prev, id] : prev.filter((catId) => catId !== id),
+    );
+  };
 
-  function handleSubmit(e: React.FormEvent) {
+  const handleTypeChange = (id: string, checked: boolean) => {
+    setSelectedTypes((prev) =>
+      checked ? [...prev, id] : prev.filter((typeId) => typeId !== id),
+    );
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onFilterSubmit?.({ categories: selectedCategories, types: selectedTypes });
-  }
+    // OPTIONAL: Add console.log here to confirm the arrays are correct before sending.
+    // console.log({ selectedCategories, selectedTypes });
+    onSubmit({
+      selectedCategories: selectedCategories,
+      selectedTypes: selectedTypes,
+    });
+  };
 
   return (
     <form
       onSubmit={handleSubmit}
       className="flex w-full flex-col pr-4 md:flex-row lg:flex-col"
     >
-      <div className="md:w-1/2">
+      <div className="md:w-1/2 lg:w-full">
         <FieldSet>
           <FieldGroup className="gap-3">
             <FieldLegend variant="label">
-              <h2 className="mt-8 text-xl font-semibold"> Products made of</h2>
+              <h2 className="mt-8 text-xl font-semibold">Products made of</h2>
             </FieldLegend>
             {filterList.categories.map((category) => (
-              <Field key={category.id} orientation="horizontal">
+              <Field orientation="horizontal" key={category.id}>
                 <Checkbox
                   id={`cat-${category.id}`}
+                  // 🛑 FIX 1: Change defaultChecked to checked. Check if the ID is in the local state.
                   checked={selectedCategories.includes(category.id)}
-                  onCheckedChange={() =>
-                    toggleSelected(
-                      selectedCategories,
-                      setSelectedCategories,
-                      category.id,
-                    )
+                  onCheckedChange={(checked) =>
+                    handleCategoryChange(category.id, checked as boolean)
                   }
                 />
                 <FieldLabel
@@ -71,19 +90,20 @@ export default function ProductFilter({
         </FieldSet>
       </div>
 
-      <div className="md:w-1/2">
+      <div className="md:w-1/2 lg:w-full">
         <FieldSet>
           <FieldGroup className="gap-3">
             <FieldLegend variant="label">
               <h2 className="mt-8 text-xl font-semibold">Types of Product</h2>
             </FieldLegend>
             {filterList.types.map((type) => (
-              <Field key={type.id} orientation="horizontal">
+              <Field orientation="horizontal" key={type.id}>
                 <Checkbox
                   id={`type-${type.id}`}
+                  // 🛑 FIX 2: Change defaultChecked to checked. Check if the ID is in the local state.
                   checked={selectedTypes.includes(type.id)}
-                  onCheckedChange={() =>
-                    toggleSelected(selectedTypes, setSelectedTypes, type.id)
+                  onCheckedChange={(checked) =>
+                    handleTypeChange(type.id, checked as boolean)
                   }
                 />
                 <FieldLabel htmlFor={`type-${type.id}`} className="font-normal">
@@ -94,8 +114,12 @@ export default function ProductFilter({
           </FieldGroup>
         </FieldSet>
       </div>
-
-      <Button type="submit">Submit</Button>
+      <Button
+        type="submit"
+        className="mt-4 max-w-40 rounded-2xl border-4 px-8 py-6 transition-colors active:bg-green-900"
+      >
+        Apply Filters
+      </Button>
     </form>
   );
 }

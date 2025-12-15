@@ -28,11 +28,6 @@ export type Product = {
   inventory: number;
   status: string;
 };
-
-// export type Tag = {
-//   name: string;
-// };
-
 export type Post = {
   id: string;
   author: string;
@@ -44,9 +39,13 @@ export type Post = {
   tags: string[];
 };
 
-export type Category = {
-  id: number;
+export type Tag = {
   name: string;
+};
+
+export type Category = {
+  id: string;
+  label: string;
 };
 
 export type User = {
@@ -68,7 +67,4 @@ export type User = {
 //   id: string;
 //   name: string;
 //   url: string;
-// };
-// category: string;
-// subcategory: string;
 // };

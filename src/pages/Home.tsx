@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import Couch from "@/data/images/couch.png";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
-import { CarouselCard } from "./products/CarouselCard";
+import { CarouselCard } from "../components/products/CarouselCard";
 import BlogCard from "../components/blogs/BlogCard";
 import { posts } from "@/data/posts";
 import ProductCard from "@/components/products/ProductCard";
@@ -69,7 +69,9 @@ function Home() {
       ></Title>
       <div className="grid grid-cols-1 gap-6 space-x-4 px-4 md:grid-cols-2 md:px-0 lg:grid-cols-4">
         {sampleProduct.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <>
+            <ProductCard key={product.id} product={product} />
+          </>
         ))}
       </div>
 

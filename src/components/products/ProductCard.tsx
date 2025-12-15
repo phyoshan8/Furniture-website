@@ -13,14 +13,18 @@ import { Icons } from "../icons/Icon";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 
-interface ProductProps {
+interface ProductProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product;
 }
 
-function ProductCard({ product }: ProductProps) {
+function ProductCard({ product, className }: ProductProps) {
   return (
-    <Card className="size-full overflow-hidden rounded-lg py-0">
+    <Card
+      className={cn(`size-full overflow-hidden rounded-lg py-0`, className)}
+    >
       <CardHeader className="gap-0 border-b p-0">
         <Link to={`products/${product.id}`}>
           <AspectRatio ratio={1 / 1} className="bg-muted">
@@ -28,7 +32,7 @@ function ProductCard({ product }: ProductProps) {
               src={product.images[0]}
               alt={product.name}
               aria-label={product.name}
-              className="size-full object-cover align-bottom"
+              className="size-full object-cover"
               loading="lazy"
             />
           </AspectRatio>
@@ -37,9 +41,11 @@ function ProductCard({ product }: ProductProps) {
       <CardContent>
         <CardTitle className="text-xl font-semibold">{product.name}</CardTitle>
         <CardDescription className="text-lg">
-          <span className="font-medium">{`$ ${product.price}`}</span>
+          <span className="font-medium">{formatPrice(product.price)}</span>
           {product.discount > 0 && (
-            <span className="ml-6 font-extralight line-through">{`$ ${product.discount}`}</span>
+            <span className="ml-6 font-extralight line-through">
+              {formatPrice(product.discount)}
+            </span>
           )}
         </CardDescription>
       </CardContent>
