@@ -1,13 +1,8 @@
 import BlogList from "@/components/blogs/BlogList";
-import React from "react";
 import { posts } from "@/data/posts";
 
 function Blog() {
-  return (
-    <div>
-      <BlogList posts={posts} />
-    </div>
-  );
+  return <BlogList posts={posts} />;
 }
 
 export default Blog;

@@ -19,6 +19,7 @@ import {
 import { formatPrice } from "@/lib/utils";
 import Rating from "@/components/products/Rating";
 import AddToFav from "@/components/products/AddToFav";
+import AddToCart from "@/components/products/AddToCart";
 
 function ProductDetail() {
   const plugin = React.useRef(
@@ -75,6 +76,7 @@ function ProductDetail() {
               rating={String(product.rating)}
             />
           </div>
+          <AddToCart buyAble={product.status === "active"} />
         </div>
       </section>
       <section className="overflow-hidden">

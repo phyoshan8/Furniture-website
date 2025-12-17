@@ -5,6 +5,7 @@ import {
   ArrowLeftIcon,
   LayersIcon,
   PlusCircledIcon,
+  MinusCircledIcon,
   StarIcon,
   HeartIcon,
 } from "@radix-ui/react-icons";
@@ -34,6 +35,7 @@ export const Icons = {
   arrowLeft: ArrowLeftIcon,
   layersIcon: LayersIcon,
   circlePlus: PlusCircledIcon,
+  circleMinus: MinusCircledIcon,
   star: StarIcon,
   heart: HeartIcon,
 };
