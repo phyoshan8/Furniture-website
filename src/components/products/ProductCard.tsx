@@ -38,7 +38,7 @@ function ProductCard({ product, className }: ProductProps) {
           </AspectRatio>
         </Link>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-6">
         <CardTitle className="text-xl font-semibold">{product.name}</CardTitle>
         <CardDescription className="text-lg">
           <span className="font-medium">{formatPrice(product.price)}</span>
